@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal do Colaborador - Estoque</title>
+<link rel="icon" type="image/png" href="https://img.icons8.com/color/48/gas-station.png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap');
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+  
+  body {
+    background: #0b0d14;
+    background-image: radial-gradient(circle at 50% 0%, #1a1738 0%, #0b0d14 75%);
+    background-attachment: fixed;
+    color: #f1f5f9;
+    line-height: 1.6;
+  }
+
+  header {
+    background: rgba(11, 13, 20, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    position: fixed; top: 0; width: 100%; z-index: 100;
+  }
+
+  .nav-container {
+    max-width: 1100px; margin: 0 auto; padding: 16px 24px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 18px; color: #fff; }
+  .logo img { width: 40px; height: 40px; border-radius: 10px; }
+
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a { color: #94a3b8; text-decoration: none; font-weight: 600; font-size: 14px; transition: color 0.2s; }
+  .nav-links a:hover { color: #10b981; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 120px 24px 60px; }
+
+  /* HERO SECTION */
+  .hero { text-align: center; padding: 60px 0; }
+  .hero h1 { font-size: 42px; font-weight: 800; margin-bottom: 16px; background: linear-gradient(to right, #fff, #cbd5e1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero p { color: #94a3b8; font-size: 18px; max-width: 600px; margin: 0 auto 32px; }
+  
+  .btn-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn { padding: 16px 28px; border-radius: 14px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; transition: all 0.2s; }
+  .btn-primary { background: linear-gradient(135deg, #10b981, #059669); color: #fff; box-shadow: 0 8px 24px -4px rgba(16,185,129,0.4); }
+  .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.1); }
+  .btn-secondary { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.1); }
+  .btn-secondary:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+  /* SECTIONS */
+  .section-title { font-size: 24px; font-weight: 800; margin-bottom: 24px; border-left: 4px solid #10b981; padding-left: 12px; }
+  
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 60px; }
+  
+  .card {
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px; padding: 24px; transition: transform 0.2s;
+  }
+  .card:hover { transform: translateY(-4px); border-color: rgba(16,185,129,0.4); background: rgba(255,255,255,0.05); }
+  
+  .card-icon { width: 48px; height: 48px; border-radius: 14px; background: rgba(16,185,129,0.15); color: #34d399; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 16px; }
+  .card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: #fff; }
+  .card p { font-size: 14px; color: #94a3b8; margin-bottom: 16px; }
+  .card a { color: #38bdf8; text-decoration: none; font-weight: 700; font-size: 13px; display: inline-flex; align-items: center; gap: 4px; }
+  .card a:hover { color: #7dd3fc; text-decoration: underline; }
+
+  /* CHANGELOG */
+  .changelog-item { border-left: 2px solid rgba(255,255,255,0.1); padding-left: 20px; position: relative; margin-bottom: 30px; }
+  .changelog-item::before { content: ''; position: absolute; left: -7px; top: 0; width: 12px; height: 12px; border-radius: 50%; background: #3b82f6; box-shadow: 0 0 10px #3b82f6; }
+  .version { font-weight: 800; color: #60a5fa; margin-bottom: 4px; font-size: 16px; }
+  .date { font-size: 12px; color: #64748b; margin-bottom: 8px; font-weight: 600; }
+  .changelog-item ul { list-style: none; margin-top: 10px; }
+  .changelog-item ul li { font-size: 14px; color: #cbd5e1; margin-bottom: 6px; padding-left: 20px; position: relative; }
+  .changelog-item ul li::before { content: '✓'; position: absolute; left: 0; color: #10b981; font-weight: bold; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-container">
+    <div class="logo">
+      <img src="https://i.postimg.cc/d1BtBqtt/images.jpg" alt="Logo">
+      Portal Interno Copasul
+    </div>
+    <div class="nav-links">
+      <a href="#inicio">Início</a>
+      <a href="#tutoriais">Tutoriais</a>
+      <a href="#atualizacoes">Atualizações</a>
+      <a href="#suporte">Suporte</a>
+    </div>
+  </div>
+</header>
+
+<div class="container" id="inicio">
+  <div class="hero">
+    <h1>Controle de Estoque Inteligente</h1>
+    <p>Baixe o aplicativo para Android, acesse o sistema pelo navegador e aprenda a usar todas as ferramentas com nossos tutoriais.</p>
+    
+    <div class="btn-group">
+      <!-- Aqui você colocará o link do seu sistema hospedado na Vercel/Netlify -->
+      <a href="link-do-seu-sistema.html" target="_blank" class="btn btn-primary">
+        <span>🌐</span> Acessar Sistema Web
+      </a>
+      <!-- Aqui ficará o link do Google Drive ou do arquivo .apk para Android -->
+      <a href="#" class="btn btn-secondary">
+        <span>📱</span> Baixar App (Android)
+      </a>
+    </div>
+  </div>
+
+  <h2 class="section-title" id="tutoriais">Tutoriais & Base de Conhecimento</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="card-icon">📦</div>
+      <h3>Contagem com Leitor</h3>
+      <p>Aprenda a utilizar a câmera do celular para ler códigos de barras e agilizar o balanço do estoque.</p>
+      <a href="#">Assistir Vídeo ➔</a>
+    </div>
+    
+    <div class="card">
+      <div class="card-icon">📅</div>
+      <h3>Controle de Validades</h3>
+      <p>Veja como lançar produtos a vencer e entender o dashboard de alertas e disparos de e-mail diários.</p>
+      <a href="#">Ler Passo a Passo ➔</a>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🏷️</div>
+      <h3>Cartazes de Promoção</h3>
+      <p>Como buscar um produto no cache do sistema e gerar um cartaz PDF pronto para a impressora do salão.</p>
+      <a href="#">Assistir Vídeo ➔</a>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">👥</div>
+      <h3>Aprovação de Acessos</h3>
+      <p>Manual exclusivo para gerentes: como aprovar novos funcionários e configurar níveis de permissão.</p>
+      <a href="#">Ler Manual ➔</a>
+    </div>
+  </div>
+
+  <h2 class="section-title" id="atualizacoes">Notas de Atualização (Changelog)</h2>
+  <div style="background: rgba(255,255,255,0.02); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 60px;">
+    
+    <div class="changelog-item">
+      <div class="version">Versão 2.1.0 - Sincronização em Nuvem</div>
+      <div class="date">Outubro de 2026</div>
+      <ul>
+        <li>Implementação do banco de dados Supabase para dual-write (Gravação em Tempo Real).</li>
+        <li>Correção da leitura dos últimos 4 dígitos do código de barras em vermelho.</li>
+        <li>Tabelas de Validades, Logs e Contagens independentes da lentidão da planilha.</li>
+      </ul>
+    </div>
+
+    <div class="changelog-item">
+      <div class="version">Versão 2.0.0 - Módulos Comerciais</div>
+      <div class="date">Setembro de 2026</div>
+      <ul>
+        <li>Adicionado Módulo de Vencimento de Clientes e Notas Fiscais.</li>
+        <li>Novo disparador automático de E-mails e relatórios de avarias.</li>
+      </ul>
+    </div>
+
+    <div class="changelog-item" style="margin-bottom: 0;">
+      <div class="version">Versão 1.0.0 - Lançamento Oficial</div>
+      <div class="date">Agosto de 2026</div>
+      <ul>
+        <li>Lançamento do sistema base com integração total ao Google Apps Script.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="section-title" id="suporte">Suporte Técnico</h2>
+  <div class="card" style="text-align: center; padding: 40px 20px;">
+    <h3 style="margin-bottom: 12px;">Encontrou algum problema ou precisa de um novo acesso?</h3>
+    <p style="margin-bottom: 24px;">Nossa equipe de TI está à disposição para ajudar com bugs, recuperação de senhas ou dúvidas de uso.</p>
+    <a href="#" class="btn btn-primary" style="text-decoration: none; color: white;">Falar com o Suporte no WhatsApp</a>
+  </div>
+
+</div>
+
+</body>
+</html>
