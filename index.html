@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" style="scroll-behavior: smooth;">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal do Colaborador - Estoque Copasul</title>
+  <title>Stock Coop - Portal Corporativo</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,14 +11,16 @@
   
   <style>
     :root {
+      /* Cores Exatas do Print - Sólidas, sem gradientes pesados */
       --bg-dark: #0b0d14;
-      --bg-header: #121520;
-      --text-main: #f8fafc;
+      --bg-header: #0b0d14; /* Mantendo a mesma cor para um visual contínuo */
+      --text-main: #ffffff;
       --text-muted: #94a3b8;
-      --brand-color: #10b981; /* Verde característico */
+      --brand-color: #10b981; /* Verde do botão e ícones */
       --brand-hover: #059669;
       --btn-secondary-bg: #1e293b;
       --btn-secondary-hover: #334155;
+      --border-color: rgba(255, 255, 255, 0.08);
     }
 
     * {
@@ -35,25 +37,26 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* HEADER */
     header {
       background-color: var(--bg-header);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       position: sticky;
       top: 0;
       z-index: 50;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
+      border-bottom: 1px solid var(--border-color);
     }
 
     .nav-wrapper {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 72px;
+      height: 80px;
     }
 
     .logo {
@@ -64,11 +67,12 @@
       font-weight: 700;
       color: var(--text-main);
       text-decoration: none;
+      letter-spacing: -0.5px;
     }
 
     .logo svg {
-      width: 32px;
-      height: 32px;
+      width: 24px;
+      height: 24px;
       color: var(--brand-color);
     }
 
@@ -105,9 +109,9 @@
     }
 
     .hero p {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       color: var(--text-muted);
-      max-width: 700px;
+      max-width: 650px;
       margin: 0 auto 40px;
     }
 
@@ -121,13 +125,13 @@
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       padding: 14px 28px;
-      border-radius: 6px; /* Borda levemente arredondada, sem formato de pílula exagerado */
+      border-radius: 6px;
       font-size: 1rem;
       font-weight: 600;
       text-decoration: none;
-      transition: background-color 0.2s;
+      transition: all 0.2s;
       cursor: pointer;
       border: none;
     }
@@ -151,29 +155,27 @@
     }
 
     .features-section {
-      padding: 60px 0 100px;
-      background-color: var(--bg-dark);
+      padding: 40px 0 100px;
     }
 
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 60px 40px;
+      gap: 40px;
     }
 
     .feature-item {
-      text-align: left; /* Alinhamento inspirado no segundo print do MediaFire */
+      text-align: left;
     }
 
     .feature-icon {
-      margin-bottom: 20px;
-      color: var(--brand-color); /* Usando a cor principal para dar destaque no fundo escuro */
+      margin-bottom: 16px;
+      color: var(--brand-color);
     }
 
-    /* Ícones em tamanho grande e traço limpo (outline) */
     .feature-icon svg {
-      width: 48px;
-      height: 48px;
+      width: 32px;
+      height: 32px;
       stroke-width: 1.5;
     }
 
@@ -185,14 +187,83 @@
     }
 
     .feature-item p {
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: var(--text-muted);
       line-height: 1.6;
     }
 
+    .tutorials-section {
+      padding: 80px 0 100px;
+      background-color: #0f121b; /* Um tom sutilmente diferente para destacar a seção */
+      border-top: 1px solid var(--border-color);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+
+    .video-card {
+      background-color: var(--bg-header);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .video-wrapper {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background-color: #000;
+      position: relative;
+    }
+
+    /* Estilizando o player de vídeo padrão */
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-info {
+      padding: 24px;
+    }
+
+    .video-info h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #ffffff;
+    }
+
+    .video-info p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    /* Responsividade */
     @media (max-width: 900px) {
-      .features-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .features-grid, .video-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
       }
       .hero h1 {
         font-size: 2.5rem;
@@ -200,11 +271,8 @@
     }
 
     @media (max-width: 600px) {
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
       .nav-links {
-        display: none; /* Esconde menu no mobile para simplificar */
+        display: none;
       }
       .btn-group {
         flex-direction: column;
@@ -223,9 +291,9 @@
     <div class="container nav-wrapper">
       <a href="#" class="logo">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
         </svg>
-        Estoque Copasul
+        Stock Coop
       </a>
       <nav class="nav-links">
         <a href="#recursos">Recursos</a>
@@ -241,7 +309,7 @@
       <p>Gerencie contagens, vencimentos de produtos e prazos de clientes de forma rápida, segura e sincronizada em tempo real.</p>
       
       <div class="btn-group">
-        <!-- Substitua "#" pelo link do sistema web (Vercel) -->
+        <!-- Substitua "#" pelo link do sistema web (Vercel/Apps Script) -->
         <a href="#" class="btn btn-primary">
           Acessar Sistema Web
         </a>
@@ -258,7 +326,7 @@
     <section id="recursos" class="features-section container">
       <div class="features-grid">
         
-        <!-- Feature 1 -->
+        <!-- Feature 1: Código de Barras -->
         <div class="feature-item">
           <div class="feature-icon">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -269,7 +337,7 @@
           <p>Utilize a câmera do seu dispositivo para ler códigos de barras, agilizando o balanço de estoque físico com precisão.</p>
         </div>
 
-        <!-- Feature 2 -->
+        <!-- Feature 2: Validades -->
         <div class="feature-item">
           <div class="feature-icon">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -280,7 +348,7 @@
           <p>Cadastre os vencimentos dos produtos do salão e receba alertas automáticos por e-mail antes que expirem.</p>
         </div>
 
-        <!-- Feature 3 -->
+        <!-- Feature 3: Relógio/Prazos -->
         <div class="feature-item">
           <div class="feature-icon">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -291,41 +359,62 @@
           <p>Monitore pendências e prazos de clientes corporativos. O painel categoriza automaticamente os status de urgência.</p>
         </div>
 
-        <!-- Feature 4 -->
-        <div class="feature-item">
-          <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
-            </svg>
-          </div>
-          <h3>Geração de Cartazes</h3>
-          <p>Crie cartazes de promoção em PDF diretamente pelo sistema, puxando o nome e as especificações da base de dados.</p>
+      </div>
+    </section>
+
+    <section id="tutoriais" class="tutorials-section">
+      <div class="container">
+        
+        <div class="section-header">
+          <h2>Tutoriais do Sistema</h2>
+          <p>Aprenda na prática como utilizar as principais ferramentas do Stock Coop.</p>
         </div>
 
-        <!-- Feature 5 -->
-        <div class="feature-item">
-          <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-            </svg>
+        <div class="video-grid">
+          
+          <!-- Vídeo 1 -->
+          <div class="video-card">
+            <div class="video-wrapper">
+              <!-- Substitua o atributo src="" pelo caminho do seu vídeo mp4 -->
+              <!-- O atributo poster="" define a imagem que aparece antes de dar o play -->
+              <video controls poster="https://placehold.co/800x450/1e293b/ffffff?text=Tutorial+Contagem">
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                Seu navegador não suporta vídeos HTML5.
+              </video>
+            </div>
+            <div class="video-info">
+              <h3>Como realizar contagens pelo celular</h3>
+              <p>Passo a passo rápido mostrando como usar a câmera para bipar os códigos e fechar a contagem do dia.</p>
+            </div>
           </div>
-          <h3>Sincronização em Nuvem</h3>
-          <p>O sistema grava dados em tempo real no Supabase, garantindo que toda a equipe acesse a mesma informação instantaneamente.</p>
-        </div>
 
-        <!-- Feature 6 -->
-        <div class="feature-item">
-          <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-            </svg>
+          <!-- Vídeo 2 -->
+          <div class="video-card">
+            <div class="video-wrapper">
+              <!-- Substitua o atributo src="" pelo caminho do seu vídeo mp4 -->
+              <video controls poster="https://placehold.co/800x450/1e293b/ffffff?text=Tutorial+Validades">
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                Seu navegador não suporta vídeos HTML5.
+              </video>
+            </div>
+            <div class="video-info">
+              <h3>Cadastrando Validades e Alertas</h3>
+              <p>Aprenda a registrar a data de vencimento dos produtos do salão e entenda como funcionam os alertas por e-mail.</p>
+            </div>
           </div>
-          <h3>Controle de Acessos</h3>
-          <p>Cadastre usuários, defina níveis de permissão e acompanhe cada ação através dos logs completos de auditoria do sistema.</p>
+
         </div>
 
       </div>
     </section>
+
+    <!-- Footer Simples -->
+    <footer id="suporte" style="text-align: center; padding: 40px 24px; border-top: 1px solid rgba(255,255,255,0.05);">
+      <p style="color: var(--text-muted); font-size: 0.95rem;">
+        Precisa de ajuda ou novos acessos? Fale com a equipe de TI no grupo do WhatsApp.
+      </p>
+    </footer>
+
   </main>
 
 </body>
