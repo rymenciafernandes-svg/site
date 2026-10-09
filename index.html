@@ -1,193 +1,332 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal do Colaborador - Estoque</title>
-<link rel="icon" type="image/png" href="https://img.icons8.com/color/48/gas-station.png">
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal do Colaborador - Estoque Copasul</title>
   
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   
-  body {
-    background: #0b0d14;
-    background-image: radial-gradient(circle at 50% 0%, #1a1738 0%, #0b0d14 75%);
-    background-attachment: fixed;
-    color: #f1f5f9;
-    line-height: 1.6;
-  }
+  <style>
+    :root {
+      --bg-dark: #0b0d14;
+      --bg-header: #121520;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --brand-color: #10b981; /* Verde característico */
+      --brand-hover: #059669;
+      --btn-secondary-bg: #1e293b;
+      --btn-secondary-hover: #334155;
+    }
 
-  header {
-    background: rgba(11, 13, 20, 0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    position: fixed; top: 0; width: 100%; z-index: 100;
-  }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
 
-  .nav-container {
-    max-width: 1100px; margin: 0 auto; padding: 16px 24px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  .logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 18px; color: #fff; }
-  .logo img { width: 40px; height: 40px; border-radius: 10px; }
+    header {
+      background-color: var(--bg-header);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
 
-  .nav-links { display: flex; gap: 24px; }
-  .nav-links a { color: #94a3b8; text-decoration: none; font-weight: 600; font-size: 14px; transition: color 0.2s; }
-  .nav-links a:hover { color: #10b981; }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
 
-  .container { max-width: 1100px; margin: 0 auto; padding: 120px 24px 60px; }
+    .nav-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 72px;
+    }
 
-  /* HERO SECTION */
-  .hero { text-align: center; padding: 60px 0; }
-  .hero h1 { font-size: 42px; font-weight: 800; margin-bottom: 16px; background: linear-gradient(to right, #fff, #cbd5e1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .hero p { color: #94a3b8; font-size: 18px; max-width: 600px; margin: 0 auto 32px; }
-  
-  .btn-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-  .btn { padding: 16px 28px; border-radius: 14px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; transition: all 0.2s; }
-  .btn-primary { background: linear-gradient(135deg, #10b981, #059669); color: #fff; box-shadow: 0 8px 24px -4px rgba(16,185,129,0.4); }
-  .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.1); }
-  .btn-secondary { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.1); }
-  .btn-secondary:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      text-decoration: none;
+    }
 
-  /* SECTIONS */
-  .section-title { font-size: 24px; font-weight: 800; margin-bottom: 24px; border-left: 4px solid #10b981; padding-left: 12px; }
-  
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 60px; }
-  
-  .card {
-    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 20px; padding: 24px; transition: transform 0.2s;
-  }
-  .card:hover { transform: translateY(-4px); border-color: rgba(16,185,129,0.4); background: rgba(255,255,255,0.05); }
-  
-  .card-icon { width: 48px; height: 48px; border-radius: 14px; background: rgba(16,185,129,0.15); color: #34d399; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 16px; }
-  .card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: #fff; }
-  .card p { font-size: 14px; color: #94a3b8; margin-bottom: 16px; }
-  .card a { color: #38bdf8; text-decoration: none; font-weight: 700; font-size: 13px; display: inline-flex; align-items: center; gap: 4px; }
-  .card a:hover { color: #7dd3fc; text-decoration: underline; }
+    .logo svg {
+      width: 32px;
+      height: 32px;
+      color: var(--brand-color);
+    }
 
-  /* CHANGELOG */
-  .changelog-item { border-left: 2px solid rgba(255,255,255,0.1); padding-left: 20px; position: relative; margin-bottom: 30px; }
-  .changelog-item::before { content: ''; position: absolute; left: -7px; top: 0; width: 12px; height: 12px; border-radius: 50%; background: #3b82f6; box-shadow: 0 0 10px #3b82f6; }
-  .version { font-weight: 800; color: #60a5fa; margin-bottom: 4px; font-size: 16px; }
-  .date { font-size: 12px; color: #64748b; margin-bottom: 8px; font-weight: 600; }
-  .changelog-item ul { list-style: none; margin-top: 10px; }
-  .changelog-item ul li { font-size: 14px; color: #cbd5e1; margin-bottom: 6px; padding-left: 20px; position: relative; }
-  .changelog-item ul li::before { content: '✓'; position: absolute; left: 0; color: #10b981; font-weight: bold; }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
 
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    .nav-links { display: none; }
-    .hero h1 { font-size: 32px; }
-  }
-</style>
+    .nav-links a {
+      color: var(--text-main);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--brand-color);
+    }
+
+    .hero {
+      padding: 100px 0 80px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      color: #ffffff;
+      letter-spacing: -1px;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto 40px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 6px; /* Borda levemente arredondada, sem formato de pílula exagerado */
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background-color 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background-color: var(--brand-color);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--brand-hover);
+    }
+
+    .btn-secondary {
+      background-color: var(--btn-secondary-bg);
+      color: var(--text-main);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--btn-secondary-hover);
+    }
+
+    .features-section {
+      padding: 60px 0 100px;
+      background-color: var(--bg-dark);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 60px 40px;
+    }
+
+    .feature-item {
+      text-align: left; /* Alinhamento inspirado no segundo print do MediaFire */
+    }
+
+    .feature-icon {
+      margin-bottom: 20px;
+      color: var(--brand-color); /* Usando a cor principal para dar destaque no fundo escuro */
+    }
+
+    /* Ícones em tamanho grande e traço limpo (outline) */
+    .feature-icon svg {
+      width: 48px;
+      height: 48px;
+      stroke-width: 1.5;
+    }
+
+    .feature-item h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #ffffff;
+    }
+
+    .feature-item p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 900px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none; /* Esconde menu no mobile para simplificar */
+      }
+      .btn-group {
+        flex-direction: column;
+        width: 100%;
+      }
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <div class="nav-container">
-    <div class="logo">
-      <img src="https://i.postimg.cc/d1BtBqtt/images.jpg" alt="Logo">
-      Portal Interno Copasul
-    </div>
-    <div class="nav-links">
-      <a href="#inicio">Início</a>
-      <a href="#tutoriais">Tutoriais</a>
-      <a href="#atualizacoes">Atualizações</a>
-      <a href="#suporte">Suporte</a>
-    </div>
-  </div>
-</header>
-
-<div class="container" id="inicio">
-  <div class="hero">
-    <h1>Controle de Estoque Inteligente</h1>
-    <p>Baixe o aplicativo para Android, acesse o sistema pelo navegador e aprenda a usar todas as ferramentas com nossos tutoriais.</p>
-    
-    <div class="btn-group">
-      <!-- Aqui você colocará o link do seu sistema hospedado na Vercel/Netlify -->
-      <a href="link-do-seu-sistema.html" target="_blank" class="btn btn-primary">
-        <span>🌐</span> Acessar Sistema Web
+  <header>
+    <div class="container nav-wrapper">
+      <a href="#" class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+        </svg>
+        Estoque Copasul
       </a>
-      <!-- Aqui ficará o link do Google Drive ou do arquivo .apk para Android -->
-      <a href="#" class="btn btn-secondary">
-        <span>📱</span> Baixar App (Android)
-      </a>
+      <nav class="nav-links">
+        <a href="#recursos">Recursos</a>
+        <a href="#tutoriais">Tutoriais</a>
+        <a href="#suporte">Suporte</a>
+      </nav>
     </div>
-  </div>
+  </header>
 
-  <h2 class="section-title" id="tutoriais">Tutoriais & Base de Conhecimento</h2>
-  <div class="grid">
-    <div class="card">
-      <div class="card-icon">📦</div>
-      <h3>Contagem com Leitor</h3>
-      <p>Aprenda a utilizar a câmera do celular para ler códigos de barras e agilizar o balanço do estoque.</p>
-      <a href="#">Assistir Vídeo ➔</a>
-    </div>
-    
-    <div class="card">
-      <div class="card-icon">📅</div>
-      <h3>Controle de Validades</h3>
-      <p>Veja como lançar produtos a vencer e entender o dashboard de alertas e disparos de e-mail diários.</p>
-      <a href="#">Ler Passo a Passo ➔</a>
-    </div>
+  <main>
+    <section class="hero container">
+      <h1>Gestão de Estoque e Validades</h1>
+      <p>Gerencie contagens, vencimentos de produtos e prazos de clientes de forma rápida, segura e sincronizada em tempo real.</p>
+      
+      <div class="btn-group">
+        <!-- Substitua "#" pelo link do sistema web (Vercel) -->
+        <a href="#" class="btn btn-primary">
+          Acessar Sistema Web
+        </a>
+        <!-- Substitua "#" pelo link do arquivo .apk no Google Drive -->
+        <a href="#" class="btn btn-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          Baixar App Android
+        </a>
+      </div>
+    </section>
 
-    <div class="card">
-      <div class="card-icon">🏷️</div>
-      <h3>Cartazes de Promoção</h3>
-      <p>Como buscar um produto no cache do sistema e gerar um cartaz PDF pronto para a impressora do salão.</p>
-      <a href="#">Assistir Vídeo ➔</a>
-    </div>
+    <section id="recursos" class="features-section container">
+      <div class="features-grid">
+        
+        <!-- Feature 1 -->
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm14 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+            </svg>
+          </div>
+          <h3>Contagem por Código de Barras</h3>
+          <p>Utilize a câmera do seu dispositivo para ler códigos de barras, agilizando o balanço de estoque físico com precisão.</p>
+        </div>
 
-    <div class="card">
-      <div class="card-icon">👥</div>
-      <h3>Aprovação de Acessos</h3>
-      <p>Manual exclusivo para gerentes: como aprovar novos funcionários e configurar níveis de permissão.</p>
-      <a href="#">Ler Manual ➔</a>
-    </div>
-  </div>
+        <!-- Feature 2 -->
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3>Controle de Validades</h3>
+          <p>Cadastre os vencimentos dos produtos do salão e receba alertas automáticos por e-mail antes que expirem.</p>
+        </div>
 
-  <h2 class="section-title" id="atualizacoes">Notas de Atualização (Changelog)</h2>
-  <div style="background: rgba(255,255,255,0.02); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 60px;">
-    
-    <div class="changelog-item">
-      <div class="version">Versão 2.1.0 - Sincronização em Nuvem</div>
-      <div class="date">Outubro de 2026</div>
-      <ul>
-        <li>Implementação do banco de dados Supabase para dual-write (Gravação em Tempo Real).</li>
-        <li>Correção da leitura dos últimos 4 dígitos do código de barras em vermelho.</li>
-        <li>Tabelas de Validades, Logs e Contagens independentes da lentidão da planilha.</li>
-      </ul>
-    </div>
+        <!-- Feature 3 -->
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3>Prazos de Clientes</h3>
+          <p>Monitore pendências e prazos de clientes corporativos. O painel categoriza automaticamente os status de urgência.</p>
+        </div>
 
-    <div class="changelog-item">
-      <div class="version">Versão 2.0.0 - Módulos Comerciais</div>
-      <div class="date">Setembro de 2026</div>
-      <ul>
-        <li>Adicionado Módulo de Vencimento de Clientes e Notas Fiscais.</li>
-        <li>Novo disparador automático de E-mails e relatórios de avarias.</li>
-      </ul>
-    </div>
+        <!-- Feature 4 -->
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+            </svg>
+          </div>
+          <h3>Geração de Cartazes</h3>
+          <p>Crie cartazes de promoção em PDF diretamente pelo sistema, puxando o nome e as especificações da base de dados.</p>
+        </div>
 
-    <div class="changelog-item" style="margin-bottom: 0;">
-      <div class="version">Versão 1.0.0 - Lançamento Oficial</div>
-      <div class="date">Agosto de 2026</div>
-      <ul>
-        <li>Lançamento do sistema base com integração total ao Google Apps Script.</li>
-      </ul>
-    </div>
-  </div>
+        <!-- Feature 5 -->
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+            </svg>
+          </div>
+          <h3>Sincronização em Nuvem</h3>
+          <p>O sistema grava dados em tempo real no Supabase, garantindo que toda a equipe acesse a mesma informação instantaneamente.</p>
+        </div>
 
-  <h2 class="section-title" id="suporte">Suporte Técnico</h2>
-  <div class="card" style="text-align: center; padding: 40px 20px;">
-    <h3 style="margin-bottom: 12px;">Encontrou algum problema ou precisa de um novo acesso?</h3>
-    <p style="margin-bottom: 24px;">Nossa equipe de TI está à disposição para ajudar com bugs, recuperação de senhas ou dúvidas de uso.</p>
-    <a href="#" class="btn btn-primary" style="text-decoration: none; color: white;">Falar com o Suporte no WhatsApp</a>
-  </div>
+        <!-- Feature 6 -->
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </div>
+          <h3>Controle de Acessos</h3>
+          <p>Cadastre usuários, defina níveis de permissão e acompanhe cada ação através dos logs completos de auditoria do sistema.</p>
+        </div>
 
-</div>
+      </div>
+    </section>
+  </main>
 
 </body>
 </html>
